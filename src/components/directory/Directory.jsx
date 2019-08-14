@@ -13,6 +13,7 @@ export class Directory extends React.Component {
       sections
     };
   }
+  
   render() {
     return (
       <div className="directory-menu">

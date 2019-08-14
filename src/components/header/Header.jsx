@@ -17,6 +17,9 @@ const Header = () => {
         <Link to="/contacts" className="navigation-item">
           Contacts
         </Link>
+        <Link to="/signin" className="navigation-item">
+          Sign In
+        </Link>
       </div>
     </div>
   );
