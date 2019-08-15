@@ -19,13 +19,21 @@ class App extends React.Component {
   }
 
   componentDidMount() {
-    this.unsubscribeFromAuth = auth.onAuthStateChanged(async user =>
-      {
-        await createUserProfileDocument(user);
-        // this.setState({ currentUser: user })
-        // console.log(user);
+    this.unsubscribeFromAuth = auth.onAuthStateChanged(async userAuth => {
+      if (userAuth) {
+        const userRef = await createUserProfileDocument(userAuth);
+        userRef.onSnapshot(snapShot => {
+          this.setState({
+            currentUser: {
+              id: snapShot.id,
+              ...snapShot.data()
+            }
+          });
+        });
+      } else {
+        this.setState({ currentUser: null });
       }
-    );
+    });
   }
 
   componentWillUnmount() {
@@ -33,7 +41,7 @@ class App extends React.Component {
   }
 
   render() {
-    const {currentUser} = this.state;
+    const { currentUser } = this.state;
     return (
       <div>
         <Header currentUser={currentUser} />

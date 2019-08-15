@@ -12,6 +12,11 @@ const config = {
   appId: "1:285439119895:web:b197b5a9ec09a861"
 };
 
+firebase.initializeApp(config);
+
+export const auth = firebase.auth();
+export const firestore = firebase.firestore();
+
 export const createUserProfileDocument = async (userAuth, additionalData) => {
   if (!userAuth) return;
 
@@ -31,17 +36,12 @@ export const createUserProfileDocument = async (userAuth, additionalData) => {
         ...additionalData
       });
     } catch(error) {
-      console.log("error while creating an user: ", error.message)
+      console.error(error.message)
     }
   }
 
   return userRef;
 };
-
-firebase.initializeApp(config);
-
-export const auth = firebase.auth();
-export const firestore = firebase.firestore();
 
 const provider = new firebase.auth.GoogleAuthProvider();
 provider.setCustomParameters({ prompt: "select_account" });
