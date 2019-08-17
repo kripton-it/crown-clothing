@@ -11,12 +11,12 @@ import { auth, createUserProfileDocument } from "./firebase/firebase.utils";
 import "./App.css";
 
 class App extends React.Component {
-  constructor() {
+  /* constructor() {
     super();
     this.state = {
       currentUser: null
     };
-  }
+  } */
 
   componentDidMount() {
     this.unsubscribeFromAuth = auth.onAuthStateChanged(async userAuth => {
@@ -41,10 +41,11 @@ class App extends React.Component {
   }
 
   render() {
-    const { currentUser } = this.state;
+    // const { currentUser } = this.state;
     return (
       <div>
-        <Header currentUser={currentUser} />
+        {/* <Header currentUser={currentUser} /> */}
+        <Header />
         <Switch>
           <Route exact path="/shop" component={ShopPage} />
           <Route exact path="/signin" component={RegistrationPage} />
