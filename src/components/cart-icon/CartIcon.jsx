@@ -11,7 +11,7 @@ import "./CartIcon.styles.scss";
 
 const CartIcon = ({ toggleCartHidden, itemsCount }) => {
   return (
-    <div className="cart-icon" onClick={toggleCartHidden}>
+    <div className="cart-icon" onClick={() => itemsCount && toggleCartHidden()}>
       <ShoppingIcon className="shopping-icon" />
       <span className="items-count">{itemsCount}</span>
     </div>
