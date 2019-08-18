@@ -5,12 +5,12 @@ import { connect } from "react-redux";
 import { auth } from "../../firebase/firebase.utils";
 
 import { ReactComponent as Logo } from "../../assets/crown.svg";
-import CartIcon from '../cart-icon/CartIcon'
-import CartDropdown from '../cart-dropdown/CartDropdown'
+import CartIcon from "../cart-icon/CartIcon";
+import CartDropdown from "../cart-dropdown/CartDropdown";
 
 import "./Header.styles.scss";
 
-const Header = ({ currentUser }) => {
+const Header = ({ currentUser, hidden }) => {
   const signInJSX = (
     <Link to="/signin" className="navigation-item">
       Sign In
@@ -37,13 +37,14 @@ const Header = ({ currentUser }) => {
         {currentUser ? signOutJSX : signInJSX}
         <CartIcon />
       </div>
-      <CartDropdown />
+      {hidden ? null : <CartDropdown />}
     </div>
   );
 };
 
-const mapStateToProps = ({ user }) => ({
-  currentUser: user.currentUser
+const mapStateToProps = ({ user: { currentUser }, cart: { hidden } }) => ({
+  currentUser,
+  hidden
 });
 
 export default connect(mapStateToProps)(Header);

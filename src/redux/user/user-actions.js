@@ -1,4 +1,4 @@
-import { UserActionTypes } from "./user-action-types";
+import UserActionTypes from "./user-action-types";
 
 const { SET_CURRENT_USER } = UserActionTypes;
 
