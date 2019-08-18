@@ -1,6 +1,6 @@
 import { createSelector } from "reselect";
 
-const selectCart = ({ cart }) => cart;
+const selectCart = state => state.cart;
 
 // внутри реализована мемоизация
 export const selectCartItems = createSelector(
@@ -18,3 +18,8 @@ export const selectCartItemsCount = createSelector(
 внизу [selectCartItems] -> выше [selectCart] -> наверху selectCart возвращает cart
 обратно: cart возвращает cartItems, в самом низу cartItems возвращает itemsCount
 */
+
+export const selectCartHidden = createSelector(
+  [selectCart],
+  cart => cart.hidden
+);
