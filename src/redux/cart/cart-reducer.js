@@ -7,7 +7,7 @@ const INITIAL_STATE = {
   cartItems: []
 };
 
-const { TOGGLE_CART_HIDDEN, ADD_ITEM } = CartActionTypes;
+const { TOGGLE_CART_HIDDEN, ADD_ITEM, REMOVE_ITEM } = CartActionTypes;
 
 const cartReducer = (state = INITIAL_STATE, action) => {
   const { hidden, cartItems } = state;
@@ -21,6 +21,11 @@ const cartReducer = (state = INITIAL_STATE, action) => {
       return {
         ...state,
         cartItems: addItemToCart(cartItems, action.payload)
+      };
+    case REMOVE_ITEM:
+      return {
+        ...state,
+        cartItems: cartItems.filter(({ id }) => id !== action.payload)
       };
     default:
       return state;
