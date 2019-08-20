@@ -57,7 +57,6 @@ class App extends React.Component {
     const { currentUser } = this.props;
     return (
       <div>
-        {/* <Header currentUser={currentUser} /> */}
         <Header />
         <Switch>
           <Route path="/shop" component={ShopPage} />

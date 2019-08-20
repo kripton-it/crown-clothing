@@ -6,7 +6,9 @@ import "./CollectionPreview.styles.scss";
 
 const PREVIEWS_NUMBER = 4;
 
-const CollectionPreview = ({ title, items }) => {
+const CollectionPreview = ({ collection }) => {
+  const { title, items } = collection;
+
   return (
     <div className="collection-preview">
       <h1 className="title">{title}</h1>
