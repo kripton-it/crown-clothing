@@ -10,7 +10,7 @@ import CheckoutPage from "./pages/checkout-page/CheckoutPage";
 
 import Header from "./components/header/Header";
 
-// import { auth, createUserProfileDocument } from "./firebase/firebase.utils";
+import { auth, createUserProfileDocument } from "./firebase/firebase.utils";
 
 import { setCurrentUserAction } from "./redux/user/user-actions";
 import { selectCurrentUser } from "./redux/user/user-selectors";
