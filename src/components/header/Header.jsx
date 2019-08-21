@@ -1,47 +1,53 @@
 import React from "react";
-import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import { createStructuredSelector } from "reselect";
 
 import { auth } from "../../firebase/firebase.utils";
 
-import { ReactComponent as Logo } from "../../assets/crown.svg";
 import CartIcon from "../cart-icon/CartIcon";
 import CartDropdown from "../cart-dropdown/CartDropdown";
 
-import "./Header.styles.scss";
 import { selectCurrentUser } from "../../redux/user/user-selectors";
 import { selectCartHidden } from "../../redux/cart/cart-selectors";
 
+import {
+  HeaderContainer,
+  LogoContainer,
+  LogoElement,
+  NavigationContainer,
+  NavigationItemLink,
+  NavigationItemDiv
+} from "./HeaderStyles";
+
 const Header = ({ currentUser, hidden }) => {
   const signInJSX = (
-    <Link to="/signin" className="navigation-item">
+    <NavigationItemLink to="/signin">
       Sign In
-    </Link>
+    </NavigationItemLink>
   );
   const signOutJSX = (
-    <div className="navigation-item" onClick={() => auth.signOut()}>
+    <NavigationItemDiv onClick={() => auth.signOut()}>
       Sign Out
-    </div>
+    </NavigationItemDiv>
   );
 
   return (
-    <div className="header">
-      <Link to="/" className="logo-container">
-        <Logo className="logo" />
-      </Link>
-      <div className="navigation">
-        <Link to="/shop" className="navigation-item">
+    <HeaderContainer>
+      <LogoContainer to="/">
+        <LogoElement />
+      </LogoContainer>
+      <NavigationContainer>
+        <NavigationItemLink to="/shop">
           Shop
-        </Link>
-        <Link to="/contacts" className="navigation-item">
+        </NavigationItemLink>
+        <NavigationItemLink to="/contacts">
           Contacts
-        </Link>
+        </NavigationItemLink>
         {currentUser ? signOutJSX : signInJSX}
         <CartIcon />
-      </div>
+      </NavigationContainer>
       {hidden ? null : <CartDropdown />}
-    </div>
+    </HeaderContainer>
   );
 };
 
