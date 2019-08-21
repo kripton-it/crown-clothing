@@ -20,7 +20,7 @@ import "./App.css";
 class App extends React.Component {
   unsubscribeFromAuth = null;
 
-  /* componentDidMount() {
+  componentDidMount() {
     const { setCurrentUser } = this.props;
     this.unsubscribeFromAuth = auth.onAuthStateChanged(async userAuth => {
       if (userAuth) {
@@ -32,7 +32,7 @@ class App extends React.Component {
               id: snapShot.id,
               ...snapShot.data()
             }
-          });
+          });*/
           // стало:
           setCurrentUser({
             id: snapShot.id,
@@ -46,11 +46,11 @@ class App extends React.Component {
         setCurrentUser(null);
       }
     });
-  } */
+  }
 
-  /* componentWillUnmount() {
+  componentWillUnmount() {
     this.unsubscribeFromAuth();
-  } */
+  }
 
   render() {
     // const { currentUser } = this.state;
