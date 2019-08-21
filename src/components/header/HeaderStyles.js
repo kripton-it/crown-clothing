@@ -1,12 +1,6 @@
-import styled, { css } from "styled-components";
+import styled from "styled-components";
 import { Link } from "react-router-dom";
 import { ReactComponent as Logo } from "../../assets/crown.svg";
-
-const NavigationItemStyles = css`
-  padding: 10px 15px;
-  text-transform: uppercase;
-  cursor: pointer;
-`;
 
 export const HeaderContainer = styled.div`
   height: 70px;
@@ -38,10 +32,8 @@ export const NavigationContainer = styled.div`
   justify-content: flex-end;
 `;
 
-export const NavigationItemLink = styled(Link)`
-  ${NavigationItemStyles}
-`;
-
-export const NavigationItemDiv = styled.div`
-  ${NavigationItemStyles}
+export const NavigationItem = styled(Link)`
+  padding: 10px 15px;
+  text-transform: uppercase;
+  cursor: pointer;
 `;

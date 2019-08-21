@@ -15,20 +15,19 @@ import {
   LogoContainer,
   LogoElement,
   NavigationContainer,
-  NavigationItemLink,
-  NavigationItemDiv
+  NavigationItem
 } from "./HeaderStyles";
 
 const Header = ({ currentUser, hidden }) => {
   const signInJSX = (
-    <NavigationItemLink to="/signin">
+    <NavigationItem to="/signin">
       Sign In
-    </NavigationItemLink>
+    </NavigationItem>
   );
   const signOutJSX = (
-    <NavigationItemDiv onClick={() => auth.signOut()}>
+    <NavigationItem as="div" onClick={() => auth.signOut()}>
       Sign Out
-    </NavigationItemDiv>
+    </NavigationItem>
   );
 
   return (
@@ -37,12 +36,12 @@ const Header = ({ currentUser, hidden }) => {
         <LogoElement />
       </LogoContainer>
       <NavigationContainer>
-        <NavigationItemLink to="/shop">
+        <NavigationItem to="/shop">
           Shop
-        </NavigationItemLink>
-        <NavigationItemLink to="/contacts">
+        </NavigationItem>
+        <NavigationItem to="/contacts">
           Contacts
-        </NavigationItemLink>
+        </NavigationItem>
         {currentUser ? signOutJSX : signInJSX}
         <CartIcon />
       </NavigationContainer>
