@@ -1,17 +1,16 @@
-import React from 'react';
+import React from "react";
 
-import SignIn from '../../components/sign-in/SignIn'
-import SignUp from '../../components/sign-up/SignUp'
+import SignIn from "../../components/sign-in/SignIn";
+import SignUp from "../../components/sign-up/SignUp";
 
-import './RegistrationPage.styles.scss'
-
+import { RegistrationPageContainer } from "./RegistrationPageStyles";
 
 const RegistationPage = () => {
   return (
-    <div className="registration-page">
+    <RegistrationPageContainer>
       <SignIn />
       <SignUp />
-    </div>
+    </RegistrationPageContainer>
   );
 };
 
