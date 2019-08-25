@@ -7,7 +7,7 @@ const config = {
   authDomain: "crown-db-2dc3f.firebaseapp.com",
   databaseURL: "https://crown-db-2dc3f.firebaseio.com",
   projectId: "crown-db-2dc3f",
-  storageBucket: "",
+  storageBucket: "crown-db-2dc3f.appspot.com",
   messagingSenderId: "285439119895",
   appId: "1:285439119895:web:b197b5a9ec09a861"
 };
@@ -35,12 +35,25 @@ export const createUserProfileDocument = async (userAuth, additionalData) => {
         createdTime,
         ...additionalData
       });
-    } catch(error) {
-      console.error(error.message)
+    } catch (error) {
+      console.error(error.message);
     }
   }
 
   return userRef;
+};
+
+export const addCollectionAndDocuments = async (
+  collectionKey,
+  objectsToAdd
+) => {
+  const collectionRef = firestore.collection(collectionKey);
+  const batch = firestore.batch();
+  objectsToAdd.forEach(obj => {
+    const newDocRef = collectionRef.doc();
+    batch.set(newDocRef, obj);
+  });
+  return await batch.commit();
 };
 
 const provider = new firebase.auth.GoogleAuthProvider();

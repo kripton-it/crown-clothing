@@ -1,6 +1,6 @@
 import React from "react";
 
-import CustomButtonContainer from "./CustomButtonStyles";
+import { CustomButtonContainer } from "./CustomButtonStyles";
 
 const CustomButton = ({ children, ...props }) => {
   return <CustomButtonContainer {...props}>{children}</CustomButtonContainer>;
