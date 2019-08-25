@@ -43,6 +43,7 @@ export const createUserProfileDocument = async (userAuth, additionalData) => {
   return userRef;
 };
 
+// универсальная функция для добавления любых коллекций в firestore
 export const addCollectionAndDocuments = async (
   collectionKey,
   objectsToAdd
