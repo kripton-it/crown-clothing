@@ -17,6 +17,9 @@ import { updateCollectionsAction } from "../../redux/shop/shop-actions";
 const CollectionsListWithSpinner = WithSpinner(CollectionsList);
 const CollectionPageWithSpinner = WithSpinner(CollectionPage);
 
+const BASE_URL =
+  "https://firestore.googleapis.com/v1/projects/crown-db-2dc3f/databases/(default)/documents/";
+
 class ShopPage extends Component {
   state = {
     isLoading: true
@@ -28,13 +31,31 @@ class ShopPage extends Component {
     const { updateCollections } = this.props;
     const collectionRef = firestore.collection("collections");
 
-    this.unsubscribeFromSnapshot = collectionRef.onSnapshot(async snapShot => {
+    /* fetch(`${BASE_URL}collections`)
+      .then(resp => resp.json())
+      .then(collections => {
+        const collectionsMap = convertCollectionsToMap(collections);
+        updateCollections(collectionsMap);
+        this.setState({
+          isLoading: false
+        });
+      }); */
+
+    collectionRef.get().then(snapShot => {
       const collectionsMap = convertCollectionsSnapshotToMap(snapShot);
       updateCollections(collectionsMap);
       this.setState({
         isLoading: false
       });
     });
+
+    /* this.unsubscribeFromSnapshot = collectionRef.onSnapshot(async snapShot => {
+      const collectionsMap = convertCollectionsSnapshotToMap(snapShot);
+      updateCollections(collectionsMap);
+      this.setState({
+        isLoading: false
+      });
+    }); */
   }
 
   componentWillUnmount() {
