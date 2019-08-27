@@ -6,10 +6,10 @@ import CollectionPage from "./CollectionPage";
 
 import WithSpinner from "../../HOC/with-spinner/with-spinner";
 
-import { selectIsCollectionsLoaded } from "../../redux/shop/shop-selectors";
+import { selectIsCollectionsAbsent } from "../../redux/shop/shop-selectors";
 
 const mapStateToProps = createStructuredSelector({
-  isLoading: state => !selectIsCollectionsLoaded(state)
+  isLoading: selectIsCollectionsAbsent
 });
 
 const CollectionPageContainer = compose(

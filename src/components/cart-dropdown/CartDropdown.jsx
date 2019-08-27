@@ -1,9 +1,5 @@
 import React from "react";
-import { connect } from "react-redux";
-import { createStructuredSelector } from "reselect";
-import { withRouter } from "react-router-dom";
 
-import { selectCartItems } from "../../redux/cart/cart-selectors";
 import { toggleCartHiddenAction } from "../../redux/cart/cart-actions";
 
 import {
@@ -34,13 +30,4 @@ const CartDropdown = ({ cartItems, history, dispatch }) => {
     </CartDropdownContainer>
   );
 };
-
-const mapStateToProps = createStructuredSelector({
-  cartItems: selectCartItems
-});
-
-// именно в таком порядке
-// чтобы иметь доступ к свойствам
-// history, match, location
-// внутри mapStateToProps
-export default withRouter(connect(mapStateToProps)(CartDropdown));
+export default CartDropdown;

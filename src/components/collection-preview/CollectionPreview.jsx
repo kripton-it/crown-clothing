@@ -1,7 +1,7 @@
 import React from "react";
 import { withRouter } from "react-router-dom";
 
-import CollectionItem from "../collection-item/CollectionItem";
+import CollectionItemContainer from "../collection-item/CollectionItemContainer";
 
 import {
   CollectionPreviewContainer,
@@ -23,7 +23,7 @@ const CollectionPreview = ({ collection, history, match, routName }) => {
       </CollectionTitle>
       <CollectionList>
         {items.slice(0, PREVIEWS_NUMBER).map(item => (
-          <CollectionItem key={item.id} item={item} />
+          <CollectionItemContainer key={item.id} item={item} />
         ))}
       </CollectionList>
     </CollectionPreviewContainer>
