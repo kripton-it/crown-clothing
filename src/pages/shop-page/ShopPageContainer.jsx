@@ -4,13 +4,13 @@ import { withRouter } from "react-router-dom";
 
 import ShopPage from "./ShopPage";
 
-import { fetchCollectionsStartAsync } from "../../redux/shop/shop-actions";
+import { fetchCollectionsStart } from "../../redux/shop/shop-actions";
 
 const ShopPageWithRouter = withRouter(ShopPage);
 
 class ShopPageContainer extends Component {
   componentDidMount() {
-    this.props.fetchCollectionsAsync();
+    this.props.fetchCollectionsStart();
   }
 
   render() {
@@ -19,7 +19,7 @@ class ShopPageContainer extends Component {
 }
 
 const mapDispatchToProps = dispatch => ({
-  fetchCollectionsAsync: () => dispatch(fetchCollectionsStartAsync())
+  fetchCollectionsStart: () => dispatch(fetchCollectionsStart())
 });
 
 export default connect(
