@@ -10,63 +10,36 @@ import CheckoutPageContainer from "./pages/checkout-page/CheckoutPageContainer";
 
 import HeaderContainer from "./components/header/HeaderContainer";
 
-import { auth, createUserProfileDocument } from "./firebase/firebase.utils";
-
-/* import {
-  auth,
-  createUserProfileDocument,
-  addCollectionAndDocuments
-} from "./firebase/firebase.utils"; */
-
-import { setCurrentUserAction } from "./redux/user/user-actions";
 import { selectCurrentUser } from "./redux/user/user-selectors";
-// import { selectCollectionsForPreview } from "./redux/shop/shop-selectors";
 
 import "./App.css";
 
 class App extends React.Component {
-  unsubscribeFromAuth = null;
+  /* unsubscribeFromAuth = null;
 
   componentDidMount() {
-    // const { setCurrentUser, collectionsArray } = this.props;
     const { setCurrentUser } = this.props;
 
     this.unsubscribeFromAuth = auth.onAuthStateChanged(async userAuth => {
       if (userAuth) {
         const userRef = await createUserProfileDocument(userAuth);
         userRef.onSnapshot(snapShot => {
-          // было:
-          /* this.setState({
-            currentUser: {
-              id: snapShot.id,
-              ...snapShot.data()
-            }
-          });*/
-          // стало:
           setCurrentUser({
             id: snapShot.id,
             ...snapShot.data()
           });
         });
       } else {
-        // было:
-        // this.setState({ currentUser: null });
-        // стало:
         setCurrentUser(null);
       }
-      /* addCollectionAndDocuments(
-        "collections",
-        collectionsArray.map(({ title, items }) => ({ title, items }))
-      ); */
     });
   }
 
   componentWillUnmount() {
     this.unsubscribeFromAuth();
-  }
+  } */
 
   render() {
-    // const { currentUser } = this.state;
     const { currentUser } = this.props;
     return (
       <div>
@@ -89,15 +62,7 @@ class App extends React.Component {
 }
 
 const mapStateToProps = createStructuredSelector({
-  currentUser: selectCurrentUser,
-  // collectionsArray: selectCollectionsForPreview
+  currentUser: selectCurrentUser
 });
 
-const mapDispatchToProps = dispatch => ({
-  setCurrentUser: user => dispatch(setCurrentUserAction(user))
-});
-
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(App);
+export default connect(mapStateToProps)(App);
