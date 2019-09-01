@@ -11,7 +11,8 @@ const {
   TOGGLE_CART_HIDDEN,
   ADD_ITEM,
   REMOVE_ITEM,
-  DECREASE_AMOUNT
+  DECREASE_AMOUNT,
+  CLEAR_CART
 } = CartActionTypes;
 
 const cartReducer = (state = INITIAL_STATE, action) => {
@@ -36,6 +37,11 @@ const cartReducer = (state = INITIAL_STATE, action) => {
       return {
         ...state,
         cartItems: decreaseItemAmount(cartItems, action.payload)
+      };
+    case CLEAR_CART:
+      return {
+        ...state,
+        cartItems: []
       };
     default:
       return state;

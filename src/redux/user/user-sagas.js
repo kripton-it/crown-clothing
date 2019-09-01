@@ -7,6 +7,8 @@ import {
   signOutFailure
 } from "./user-actions";
 
+// import { clearCart } from "../cart/cart-actions";
+
 import {
   GOOGLE_SIGN_IN_START,
   EMAIL_SIGN_IN_START,
@@ -69,6 +71,7 @@ function* onSignOutStart() {
   try {
     yield auth.signOut();
     yield put(signOutSuccess());
+    // yield put(clearCart());
   } catch (error) {
     yield put(signOutFailure(error));
   }

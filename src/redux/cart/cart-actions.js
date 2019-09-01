@@ -4,7 +4,8 @@ const {
   TOGGLE_CART_HIDDEN,
   ADD_ITEM,
   REMOVE_ITEM,
-  DECREASE_AMOUNT
+  DECREASE_AMOUNT,
+  CLEAR_CART
 } = CartActionTypes;
 
 // переключение корзины (открыта/закрыта)
@@ -28,4 +29,9 @@ export const removeItemFromCartAction = item => ({
 export const decreaseAmountAction = item => ({
   type: DECREASE_AMOUNT,
   payload: item
+});
+
+// очистка корзины
+export const clearCart = () => ({
+  type: CLEAR_CART
 });
