@@ -10,37 +10,41 @@ import {
   createUserProfileDocument
 } from "../../firebase/firebase.utils";
 
-const {
-  SET_CURRENT_USER,
-  GOOGLE_SIGN_IN_START,
-  GOOGLE_SIGN_IN_SUCCESS,
-  GOOGLE_SIGN_IN_FAILURE,
-  EMAIL_SIGN_IN_START,
-  EMAIL_SIGN_IN_SUCCESS,
-  EMAIL_SIGN_IN_FAILURE
-} = UserActionTypes;
+const { GOOGLE_SIGN_IN_START, EMAIL_SIGN_IN_START } = UserActionTypes;
 
-const {
-  // setCurrentUser,
-  googleSignInSuccess,
-  googleSignInFailure,
-  emailSignInSuccess,
-  emailSignInFailure
-} = UserActions;
+const { signInSuccess, signInFailure } = UserActions;
 
-function* onGoogleSignInStart() {
+function* getSnapshotFromUserAuth(userAuth) {
   try {
-    const { user } = yield auth.signInWithPopup(googleProvider);
-    const userRef = yield call(createUserProfileDocument, user);
+    const userRef = yield call(createUserProfileDocument, userAuth);
     const userSnapshot = yield userRef.get();
     yield put(
-      googleSignInSuccess({
+      signInSuccess({
         id: userSnapshot.id,
         ...userSnapshot.data()
       })
     );
   } catch (error) {
-    yield put(googleSignInFailure(error));
+    yield put(signInFailure(error));
+  }
+}
+
+function* onGoogleSignInStart() {
+  try {
+    const { user } = yield auth.signInWithPopup(googleProvider);
+    yield getSnapshotFromUserAuth(user);
+  } catch (error) {
+    yield put(signInFailure(error));
+  }
+}
+
+function* onEmailSignInStart({ payload }) {
+  try {
+    const { email, password } = payload;
+    const { user } = yield auth.signInWithEmailAndPassword(email, password);
+    yield getSnapshotFromUserAuth(user);
+  } catch (error) {
+    yield put(signInFailure(error));
   }
 }
 
@@ -48,8 +52,12 @@ function* googleSignInStart() {
   yield takeLatest(GOOGLE_SIGN_IN_START, onGoogleSignInStart);
 }
 
+function* emailSignInStart() {
+  yield takeLatest(EMAIL_SIGN_IN_START, onEmailSignInStart);
+}
+
 export default function* userSagas() {
-  yield all([call(googleSignInStart)]);
+  yield all([call(googleSignInStart), call(emailSignInStart)]);
 }
 
 /* export function* fetchCollectionsAsync() {
