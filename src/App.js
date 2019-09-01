@@ -11,32 +11,15 @@ import CheckoutPageContainer from "./pages/checkout-page/CheckoutPageContainer";
 import HeaderContainer from "./components/header/HeaderContainer";
 
 import { selectCurrentUser } from "./redux/user/user-selectors";
+import { checkUserStart } from "./redux/user/user-actions";
 
 import "./App.css";
 
 class App extends React.Component {
-  /* unsubscribeFromAuth = null;
-
   componentDidMount() {
-
-    this.unsubscribeFromAuth = auth.onAuthStateChanged(async userAuth => {
-      if (userAuth) {
-        const userRef = await createUserProfileDocument(userAuth);
-        userRef.onSnapshot(snapShot => {
-          setCurrentUser({
-            id: snapShot.id,
-            ...snapShot.data()
-          });
-        });
-      } else {
-        setCurrentUser(null);
-      }
-    });
+    const { checkUser } = this.props;
+    checkUser();
   }
-
-  componentWillUnmount() {
-    this.unsubscribeFromAuth();
-  } */
 
   render() {
     const { currentUser } = this.props;
@@ -64,4 +47,11 @@ const mapStateToProps = createStructuredSelector({
   currentUser: selectCurrentUser
 });
 
-export default connect(mapStateToProps)(App);
+const mapDispatchToProps = dispatch => ({
+  checkUser: () => dispatch(checkUserStart())
+});
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(App);

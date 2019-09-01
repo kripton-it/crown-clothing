@@ -7,7 +7,9 @@ const INITIAL_STATE = {
 
 const {
   SIGN_IN_SUCCESS,
-  SIGN_IN_FAILURE
+  SIGN_IN_FAILURE,
+  CHECK_USER_SUCCESS,
+  CHECK_USER_FAILURE
 } = UserActionTypes;
 
 const userReducer = (state = INITIAL_STATE, action) => {

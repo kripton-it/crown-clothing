@@ -1,18 +1,19 @@
 import { takeLatest, put, all, call } from "redux-saga/effects";
 
-import * as UserActions from "./user-actions";
+import { signInSuccess, signInFailure } from "./user-actions";
 
-import UserActionTypes from "./user-action-types";
+import {
+  GOOGLE_SIGN_IN_START,
+  EMAIL_SIGN_IN_START,
+  CHECK_USER_START
+} from "./user-action-types";
 
 import {
   googleProvider,
   auth,
-  createUserProfileDocument
+  createUserProfileDocument,
+  getCurrentUser
 } from "../../firebase/firebase.utils";
-
-const { GOOGLE_SIGN_IN_START, EMAIL_SIGN_IN_START } = UserActionTypes;
-
-const { signInSuccess, signInFailure } = UserActions;
 
 function* getSnapshotFromUserAuth(userAuth) {
   try {
@@ -48,6 +49,16 @@ function* onEmailSignInStart({ payload }) {
   }
 }
 
+function* onCheckUserStart() {
+  try {
+    const user = yield getCurrentUser();
+    if (!user) return;
+    yield getSnapshotFromUserAuth(user);
+  } catch (error) {
+    yield put(signInFailure(error));
+  }
+}
+
 function* googleSignInStart() {
   yield takeLatest(GOOGLE_SIGN_IN_START, onGoogleSignInStart);
 }
@@ -56,24 +67,14 @@ function* emailSignInStart() {
   yield takeLatest(EMAIL_SIGN_IN_START, onEmailSignInStart);
 }
 
+function* checkUserStart() {
+  yield takeLatest(CHECK_USER_START, onCheckUserStart);
+}
+
 export default function* userSagas() {
-  yield all([call(googleSignInStart), call(emailSignInStart)]);
+  yield all([
+    call(googleSignInStart),
+    call(emailSignInStart),
+    call(checkUserStart)
+  ]);
 }
-
-/* export function* fetchCollectionsAsync() {
-  try {
-    const collectionRef = firestore.collection("collections");
-    const snapshot = yield collectionRef.get();
-    const collectionsMap = yield call(
-      convertCollectionsSnapshotToMap,
-      snapshot
-    );
-    yield put(fetchCollectionsSuccess(collectionsMap));
-  } catch (error) {
-    yield put(fetchCollectionsFailure(error.message));
-  }
-}
-
-export function* fetchCollectionsStart() {
-  yield takeLatest(FETCH_COLLECTIONS_START, fetchCollectionsAsync);
-} */
