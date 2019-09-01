@@ -9,7 +9,8 @@ const {
   SIGN_IN_SUCCESS,
   SIGN_IN_FAILURE,
   SIGN_OUT_SUCCESS,
-  SIGN_OUT_FAILURE
+  SIGN_OUT_FAILURE,
+  SIGN_UP_FAILURE
 } = UserActionTypes;
 
 const userReducer = (state = INITIAL_STATE, action) => {
@@ -27,6 +28,7 @@ const userReducer = (state = INITIAL_STATE, action) => {
         error: null
       };
     case SIGN_IN_FAILURE:
+    case SIGN_UP_FAILURE:
     case SIGN_OUT_FAILURE:
       return {
         ...state,
