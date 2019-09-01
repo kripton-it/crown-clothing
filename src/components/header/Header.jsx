@@ -1,7 +1,5 @@
 import React from "react";
 
-import { auth } from "../../firebase/firebase.utils";
-
 import CartIconContainer from "../cart-icon/CartIconContainer";
 import CartDropdownContainer from "../cart-dropdown/CartDropdownContainer";
 
@@ -13,10 +11,10 @@ import {
   NavigationItem
 } from "./HeaderStyles";
 
-const Header = ({ currentUser, hidden }) => {
+const Header = ({ currentUser, hidden, signOut }) => {
   const signInJSX = <NavigationItem to="/signin">Sign In</NavigationItem>;
   const signOutJSX = (
-    <NavigationItem as="div" onClick={() => auth.signOut()}>
+    <NavigationItem as="div" onClick={signOut}>
       Sign Out
     </NavigationItem>
   );
