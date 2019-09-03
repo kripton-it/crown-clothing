@@ -1,15 +1,15 @@
 import React from "react";
 
-import SignIn from "../../components/sign-in/SignIn";
-import SignUp from "../../components/sign-up/SignUp";
+import SignInContainer from "../../components/sign-in/SignInContainer";
+import SignUpContainer from "../../components/sign-up/SignUpContainer";
 
 import { RegistrationPageContainer } from "./RegistrationPageStyles";
 
 const RegistationPage = () => {
   return (
     <RegistrationPageContainer>
-      <SignIn />
-      <SignUp />
+      <SignInContainer />
+      <SignUpContainer />
     </RegistrationPageContainer>
   );
 };
