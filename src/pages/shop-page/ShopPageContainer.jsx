@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { useEffect } from "react";
 import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
 
@@ -8,15 +8,13 @@ import { fetchCollectionsStart } from "../../redux/shop/shop-actions";
 
 const ShopPageWithRouter = withRouter(ShopPage);
 
-class ShopPageContainer extends Component {
-  componentDidMount() {
-    this.props.fetchCollectionsStart();
-  }
+const ShopPageContainer = ({ fetchCollectionsStart }) => {
+  useEffect(() => {
+    fetchCollectionsStart();
+  }, [fetchCollectionsStart]);
 
-  render() {
-    return <ShopPageWithRouter />;
-  }
-}
+  return <ShopPageWithRouter />;
+};
 
 const mapDispatchToProps = dispatch => ({
   fetchCollectionsStart: () => dispatch(fetchCollectionsStart())

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Route, Switch, Redirect } from "react-router-dom";
 import { connect } from "react-redux";
 import { createStructuredSelector } from "reselect";
@@ -10,48 +10,54 @@ import CheckoutPageContainer from "./pages/checkout-page/CheckoutPageContainer";
 
 import HeaderContainer from "./components/header/HeaderContainer";
 
+import { selectCartItemsCount } from "./redux/cart/cart-selectors";
 import { selectCurrentUser } from "./redux/user/user-selectors";
 import { checkUserStart } from "./redux/user/user-actions";
 
 import "./App.css";
 
-class App extends React.Component {
-  componentDidMount() {
-    const { checkUser } = this.props;
+const App = ({ currentUser, cartItemsCount, checkUser }) => {
+  useEffect(() => {
     checkUser();
-  }
+  }, [checkUser]);
 
-  render() {
-    const { currentUser } = this.props;
-    return (
-      <div>
-        <HeaderContainer />
-        <Switch>
-          <Route path="/shop" component={ShopPageContainer} />
-          <Route exact path="/checkout" component={CheckoutPageContainer} />
-          <Route
-            exact
-            path="/signin"
-            render={() =>
-              currentUser ? <Redirect to="/" /> : <RegistrationPage />
-            }
-          />
-          <Route exact path="/" component={HomePage} />
-        </Switch>
-      </div>
-    );
-  }
-}
+  return (
+    <div>
+      <HeaderContainer />
+      <Switch>
+        <Route path="/shop" component={ShopPageContainer} />
+        <Route
+          exact
+          path="/checkout"
+          render={() =>
+            cartItemsCount ? <CheckoutPageContainer /> : <Redirect to="/" />
+          }
+        />
+        <Route
+          exact
+          path="/signin"
+          render={() =>
+            currentUser ? <Redirect to="/" /> : <RegistrationPage />
+          }
+        />
+        <Route exact path="/" component={HomePage} />
+      </Switch>
+    </div>
+  );
+};
 
 const mapStateToProps = createStructuredSelector({
-  currentUser: selectCurrentUser
+  currentUser: selectCurrentUser,
+  cartItemsCount: selectCartItemsCount
 });
 
 const mapDispatchToProps = dispatch => ({
   checkUser: () => dispatch(checkUserStart())
 });
 
-export default connect(
+const AppContainer = connect(
   mapStateToProps,
   mapDispatchToProps
 )(App);
+
+export default AppContainer;
