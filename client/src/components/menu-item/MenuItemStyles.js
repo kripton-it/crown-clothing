@@ -6,7 +6,6 @@ const HEIGHTS = {
 };
 
 export const MenuItemContainer = styled.div`
-  /* position: relative;*/
   min-width: 30%;
   flex: 1 1 auto;
   display: flex;
@@ -35,6 +34,10 @@ export const MenuItemContainer = styled.div`
     & .content {
       opacity: 0.9;
     }
+  }
+
+  @media screen and (max-width: 800px) {
+    height: 200px;
   }
 `;
 

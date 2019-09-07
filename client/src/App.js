@@ -14,7 +14,7 @@ import { selectCartItemsCount } from "./redux/cart/cart-selectors";
 import { selectCurrentUser } from "./redux/user/user-selectors";
 import { checkUserStart } from "./redux/user/user-actions";
 
-import "./App.css";
+import { GlobalStyle } from "./global.styles";
 
 const App = ({ currentUser, cartItemsCount, checkUser }) => {
   useEffect(() => {
@@ -23,6 +23,7 @@ const App = ({ currentUser, cartItemsCount, checkUser }) => {
 
   return (
     <div>
+      <GlobalStyle />
       <HeaderContainer />
       <Switch>
         <Route path="/shop" component={ShopPageContainer} />
