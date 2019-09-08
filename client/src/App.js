@@ -5,6 +5,7 @@ import { createStructuredSelector } from "reselect";
 
 import HeaderContainer from "./components/header/HeaderContainer";
 import Spinner from "./components/spinner/spinner";
+import ErrorBoundary from './components/error-boundary/ErrorBoundary'
 
 import { selectCartItemsCount } from "./redux/cart/cart-selectors";
 import { selectCurrentUser } from "./redux/user/user-selectors";
@@ -31,24 +32,26 @@ const App = ({ currentUser, cartItemsCount, checkUser }) => {
       <GlobalStyle />
       <HeaderContainer />
       <Switch>
-        <Suspense fallback={<Spinner />}>
-          <Route path="/shop" component={ShopPage} />
-          <Route
-            exact
-            path="/checkout"
-            render={() =>
-              cartItemsCount ? <CheckoutPage /> : <Redirect to="/" />
-            }
-          />
-          <Route
-            exact
-            path="/signin"
-            render={() =>
-              currentUser ? <Redirect to="/" /> : <RegistrationPage />
-            }
-          />
-          <Route exact path="/" component={HomePage} />
-        </Suspense>
+        <ErrorBoundary>
+          <Suspense fallback={<Spinner />}>
+            <Route path="/shop" component={ShopPage} />
+            <Route
+              exact
+              path="/checkout"
+              render={() =>
+                cartItemsCount ? <CheckoutPage /> : <Redirect to="/" />
+              }
+            />
+            <Route
+              exact
+              path="/signin"
+              render={() =>
+                currentUser ? <Redirect to="/" /> : <RegistrationPage />
+              }
+            />
+            <Route exact path="/" component={HomePage} />
+          </Suspense>
+        </ErrorBoundary>
       </Switch>
     </div>
   );
