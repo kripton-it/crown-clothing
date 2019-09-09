@@ -2,6 +2,7 @@ const path = require("path"); // native module
 const express = require("express"); // library to build API server easier
 const cors = require("cors"); // Cross Origin Requests
 const bodyParser = require("body-parser");
+const compression = require("compression");
 
 // доступ к секретному ключу
 if (process.env.NODE_ENV !== "production") require("dotenv").config();
@@ -18,6 +19,7 @@ app.use(
   })
 );
 app.use(cors());
+app.use(compression());
 
 if (process.env.NODE_ENV === "production") {
   app.use(express.static(path.join(__dirname, "client/build")));
