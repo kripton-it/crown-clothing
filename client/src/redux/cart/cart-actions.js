@@ -5,7 +5,10 @@ const {
   ADD_ITEM,
   REMOVE_ITEM,
   DECREASE_AMOUNT,
-  CLEAR_CART
+  CLEAR_CART,
+  SET_CART_FROM_FIREBASE,
+  UPDATE_CART_IN_FIREBASE
+
 } = CartActionTypes;
 
 // переключение корзины (открыта/закрыта)
@@ -34,4 +37,13 @@ export const decreaseAmountAction = item => ({
 // очистка корзины
 export const clearCart = () => ({
   type: CLEAR_CART
+});
+
+export const setCartFromFirebase = cartItems => ({
+  type: SET_CART_FROM_FIREBASE,
+  payload: cartItems
+});
+
+export const updateCartInFirebase = () => ({
+  type: UPDATE_CART_IN_FIREBASE
 });
