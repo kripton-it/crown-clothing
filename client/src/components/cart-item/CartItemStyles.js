@@ -11,6 +11,8 @@ export const CartItemContainer = styled.div`
   }
 `;
 
+CartItemContainer.displayName = "CartItemContainer";
+
 export const ItemsDetails = styled.div`
   width: 70%;
   display: flex;
@@ -24,4 +26,8 @@ export const ItemName = styled.span`
   font-size: 16px;
 `;
 
+ItemName.displayName = "ItemName";
+
 export const ItemPrice = styled.span``;
+
+ItemPrice.displayName = "ItemPrice";

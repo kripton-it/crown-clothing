@@ -11,7 +11,7 @@ import {
 
 const PREVIEWS_NUMBER = 4;
 
-const CollectionPreview = ({ collection, history, match, routName }) => {
+export const CollectionPreview = ({ collection, history, match, routName }) => {
   const { title, items } = collection;
 
   return (

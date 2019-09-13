@@ -26,11 +26,11 @@ const CheckoutItem = ({
       </ImageContainer>
       <ItemName>{name}</ItemName>
       <ItemQuantityContainer>
-        <ItemQuantityArrow onClick={() => decreaseAmount(cartItem)}>
+        <ItemQuantityArrow id="arrow-left" onClick={() => decreaseAmount(cartItem)}>
           &#10094;
         </ItemQuantityArrow>
         <ItemQuantityValue>{quantity}</ItemQuantityValue>
-        <ItemQuantityArrow onClick={() => addItemToCart(cartItem)}>
+        <ItemQuantityArrow id="arrow-right" onClick={() => addItemToCart(cartItem)}>
           &#10095;
         </ItemQuantityArrow>
       </ItemQuantityContainer>

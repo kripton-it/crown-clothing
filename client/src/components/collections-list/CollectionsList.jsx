@@ -8,7 +8,7 @@ import { CollectionsListContainer } from "./CollectionsListStyles";
 
 import { selectCollectionsForPreview } from "../../redux/shop/shop-selectors";
 
-const CollectionsList = ({ collections }) => {
+export const CollectionsList = ({ collections }) => {
   return (
     <CollectionsListContainer>
       {collections.map(collection => (

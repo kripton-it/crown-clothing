@@ -49,6 +49,8 @@ export const FormInputContainer = styled.input`
   }
 `;
 
+FormInputContainer.displayName = "FormInputContainer";
+
 export const FormInputLabel = styled.label`
   font-weight: normal;
   position: absolute;
@@ -57,3 +59,5 @@ export const FormInputLabel = styled.label`
   transition: 300ms ease all;
   ${getLabelStyles}
 `;
+
+FormInputLabel.displayName = "FormInputLabel";

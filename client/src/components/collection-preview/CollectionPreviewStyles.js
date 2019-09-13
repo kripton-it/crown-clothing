@@ -16,6 +16,8 @@ export const CollectionTitle = styled.h1`
   text-transform: uppercase;
 `;
 
+CollectionTitle.displayName = "CollectionTitle";
+
 export const CollectionList = styled.div`
   display: flex;
   justify-content: space-between;

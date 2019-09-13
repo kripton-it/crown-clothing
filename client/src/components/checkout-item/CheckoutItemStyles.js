@@ -32,9 +32,13 @@ export const ImageContainer = styled.div`
   }
 `;
 
+ImageContainer.displayName = "ImageContainer";
+
 export const ItemName = styled.span`
   ${columnStyles}
 `;
+
+ItemName.displayName = "ItemName";
 
 export const ItemQuantityContainer = styled.div`
   display: flex;
@@ -45,6 +49,8 @@ export const ItemPrice = styled.span`
   ${columnStyles}
 `;
 
+ItemPrice.displayName = "ItemPrice";
+
 export const ItemQuantityArrow = styled.div`
   cursor: pointer;
 `;
@@ -53,7 +59,11 @@ export const ItemQuantityValue = styled.span`
   margin: 0 10px;
 `;
 
+ItemQuantityValue.displayName = "ItemQuantityValue";
+
 export const RemoveButton = styled.div`
   padding-left: 12px;
   cursor: pointer;
 `;
+
+RemoveButton.displayName = "RemoveButton";

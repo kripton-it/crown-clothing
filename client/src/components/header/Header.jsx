@@ -1,7 +1,7 @@
 import React from "react";
 
 import CartIconContainer from "../cart-icon/CartIconContainer";
-import CartDropdownContainer from "../cart-dropdown/CartDropdownContainer";
+import CartDropdown from "../cart-dropdown/CartDropdownContainer";
 
 import {
   HeaderContainer,
@@ -12,9 +12,13 @@ import {
 } from "./HeaderStyles";
 
 const Header = ({ currentUser, hidden, signOut }) => {
-  const signInJSX = <NavigationItem to="/signin">Sign In</NavigationItem>;
+  const signInJSX = (
+    <NavigationItem id="sign-link" to="/signin">
+      Sign In
+    </NavigationItem>
+  );
   const signOutJSX = (
-    <NavigationItem as="div" onClick={signOut}>
+    <NavigationItem id="sign-link" as="div" onClick={signOut}>
       Sign Out
     </NavigationItem>
   );
@@ -30,7 +34,7 @@ const Header = ({ currentUser, hidden, signOut }) => {
         {currentUser ? signOutJSX : signInJSX}
         <CartIconContainer />
       </NavigationContainer>
-      {hidden ? null : <CartDropdownContainer />}
+      {hidden ? null : <CartDropdown />}
     </HeaderContainer>
   );
 };
