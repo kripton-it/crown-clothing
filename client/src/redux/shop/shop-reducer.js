@@ -6,13 +6,13 @@ const {
   FETCH_COLLECTIONS_FAILURE
 } = ShopActionTypes;
 
-const INITIAL_STATE = {
+export const INITIAL_STATE = {
   collections: null,
   isFetching: false,
   errorMessage: ""
 };
 
-const shopReducer = (state = INITIAL_STATE, action) => {
+const shopReducer = (state = INITIAL_STATE, action = {}) => {
   switch (action.type) {
     case FETCH_COLLECTIONS_START:
       return {

@@ -16,7 +16,7 @@ const {
   SET_CART_FROM_FIREBASE
 } = CartActionTypes;
 
-const cartReducer = (state = INITIAL_STATE, action) => {
+const cartReducer = (state = INITIAL_STATE, action = {}) => {
   const { hidden, cartItems } = state;
   switch (action.type) {
     case TOGGLE_CART_HIDDEN:

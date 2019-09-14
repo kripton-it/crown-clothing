@@ -1,10 +1,10 @@
 import sections from "./sections";
 
-const INITIAL_STATE = {
+export const INITIAL_STATE = {
   sections
 };
 
-const directoryReducer = (state = INITIAL_STATE, action) => {
+const directoryReducer = (state = INITIAL_STATE, action = {}) => {
   switch (action.type) {
     // если когда-то появятся действия - у нас уже всё готово
     default:
