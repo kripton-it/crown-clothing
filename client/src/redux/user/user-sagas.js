@@ -26,7 +26,7 @@ const {
   SIGN_UP_SUCCESS
 } = UserActionTypes;
 
-function* getSnapshotFromUserAuth(userAuth, additionalData) {
+export function* getSnapshotFromUserAuth(userAuth, additionalData) {
   try {
     const userRef = yield call(
       createUserProfileDocument,
@@ -45,7 +45,7 @@ function* getSnapshotFromUserAuth(userAuth, additionalData) {
   }
 }
 
-function* onGoogleSignInStart() {
+export function* onGoogleSignInStart() {
   try {
     const { user } = yield auth.signInWithPopup(googleProvider);
     yield getSnapshotFromUserAuth(user);
@@ -54,7 +54,7 @@ function* onGoogleSignInStart() {
   }
 }
 
-function* onEmailSignInStart({ payload }) {
+export function* onEmailSignInStart({ payload }) {
   try {
     const { email, password } = payload;
     const { user } = yield auth.signInWithEmailAndPassword(email, password);
@@ -64,7 +64,7 @@ function* onEmailSignInStart({ payload }) {
   }
 }
 
-function* onCheckUserStart() {
+export function* onCheckUserStart() {
   try {
     const user = yield getCurrentUser();
     if (!user) return;
@@ -74,7 +74,7 @@ function* onCheckUserStart() {
   }
 }
 
-function* onSignOutStart() {
+export function* onSignOutStart() {
   try {
     yield auth.signOut();
     yield put(signOutSuccess());
@@ -83,7 +83,7 @@ function* onSignOutStart() {
   }
 }
 
-function* onSignUpStart({ payload }) {
+export function* onSignUpStart({ payload }) {
   try {
     const { email, password, displayName } = payload;
     const { user } = yield auth.createUserWithEmailAndPassword(email, password);
@@ -98,34 +98,34 @@ function* onSignUpStart({ payload }) {
   }
 }
 
-function* signInAfterSignUp({ payload }) {
+export function* signInAfterSignUp({ payload }) {
   try {
     const { user, additionalData } = payload;
     yield call(getSnapshotFromUserAuth, user, additionalData);
   } catch (error) {}
 }
 
-function* googleSignInStart() {
+export function* googleSignInStart() {
   yield takeLatest(GOOGLE_SIGN_IN_START, onGoogleSignInStart);
 }
 
-function* emailSignInStart() {
+export function* emailSignInStart() {
   yield takeLatest(EMAIL_SIGN_IN_START, onEmailSignInStart);
 }
 
-function* checkUserStart() {
+export function* checkUserStart() {
   yield takeLatest(CHECK_USER_START, onCheckUserStart);
 }
 
-function* signOutStart() {
+export function* signOutStart() {
   yield takeLatest(SIGN_OUT_START, onSignOutStart);
 }
 
-function* signUpStart() {
+export function* signUpStart() {
   yield takeLatest(SIGN_UP_START, onSignUpStart);
 }
 
-function* signInAfterSignUpSuccess() {
+export function* signInAfterSignUpSuccess() {
   yield takeLatest(SIGN_UP_SUCCESS, signInAfterSignUp);
 }
 

@@ -12,11 +12,11 @@ import { getUserCartRef } from "../../firebase/firebase.utils";
 const { SIGN_OUT_SUCCESS, SIGN_IN_SUCCESS } = UserActiontypes;
 const { ADD_ITEM, REMOVE_ITEM, DECREASE_AMOUNT, CLEAR_CART } = CartActiontypes;
 
-function* clearCartAfterSignOutSuccess() {
+export function* clearCartAfterSignOutSuccess() {
   yield put(clearCart());
 }
 
-function* updateCartInFirebase() {
+export function* updateCartInFirebase() {
   const currentUser = yield select(selectCurrentUser);
   if (currentUser) {
     try {
@@ -29,21 +29,21 @@ function* updateCartInFirebase() {
   }
 }
 
-function* checkCartFromFirebase({ payload: user }) {
+export function* checkCartFromFirebase({ payload: user }) {
   const cartRef = yield getUserCartRef(user.id);
   const cartSnapshot = yield cartRef.get();
   yield put(setCartFromFirebase(cartSnapshot.data().cartItems));
 }
 
-function* signOutSuccess() {
+export function* signOutSuccess() {
   yield takeLatest(SIGN_OUT_SUCCESS, clearCartAfterSignOutSuccess);
 }
 
-function* onUserSignIn() {
+export function* onUserSignIn() {
   yield takeLatest(SIGN_IN_SUCCESS, checkCartFromFirebase);
 }
 
-function* onCartChange() {
+export function* onCartChange() {
   yield takeLatest(
     [ADD_ITEM, REMOVE_ITEM, DECREASE_AMOUNT, CLEAR_CART],
     updateCartInFirebase
